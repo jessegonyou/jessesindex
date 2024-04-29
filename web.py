@@ -8,12 +8,6 @@ f = open("sites.json", "r")
 urls = load(f)
 f.close()
 
-# Load the images dictionary from JSON
-print("Loading images.json...")
-f = open("images.json", "r")
-images = load(f)
-f.close()
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -48,18 +42,10 @@ def index():
 
     # Sort the results by relevance
     sorted_results = {k: v for k, v in sorted(results.items(), key=lambda item: item[1])}
-    
-    # Get relavent images
-    image_results = []
-    for url in reversed(sorted_results.keys()):
-        if url in images.keys():
-            image_results.append(images[url])
-        if len(image_results) >= 10:
-            break
 
     end_time = time()
     
-    return render_template("search.html", query = query, urls = urls, results_num = len(results), images = image_results, results = list(reversed(sorted_results))[0:min(49,len(sorted_results))], start_time = start_time, end_time = end_time)
+    return render_template("search.html", query = query, urls = urls, results_num = len(results), results = list(reversed(sorted_results))[0:min(49,len(sorted_results))], start_time = start_time, end_time = end_time)
 
 
 # ...
