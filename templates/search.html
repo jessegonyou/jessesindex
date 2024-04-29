@@ -40,11 +40,6 @@
         <div class="timer">
             {{ results_num }} results in {{ end_time - start_time }} seconds.
         </div>
-        <div class="images">
-            {% for image in images %}
-            <img src="{{ image }}" height="100" />
-            {% endfor %}
-        </div>
         <div class="results">
             {% for result in results %}
             <div class="result">
